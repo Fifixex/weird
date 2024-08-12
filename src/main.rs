@@ -1,18 +1,22 @@
+use args::{CliArgs, Command};
 use anyhow::Result;
-use crossterm::event::EventStream;
-use app::Application;
-use args::Args;
+use clap::Parser;
 
-fn main() -> Result<()> {
-    let mut args = Args::parse_args().context("Could not parse arguments!")?;
-    let help_message = format!("Weird - v{}", env!("CARGO_PKG_VERSION"));
+mod files;
 
-    if args.get_information {
-        print!("{}", help_message);
-        std::process::exit(0);
+mod args;
+mod util;
+
+pub fn main() -> Result<()> {
+    tracing_subscriber::fmt()
+        .without_time()
+        .with_target(false)
+        .compact()
+        .init();
+
+    let args = CliArgs::parse();
+
+    match args.command {
+        Command::Files(args) => files::run(args)
     }
-
-    let mut app = Application::new(args).context("Unable to create new application")?;
-    let exit_code = app.run(&mut EventStream::new())?;
-    std::process::exit(exit_code);
 }
