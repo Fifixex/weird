@@ -1,4 +1,5 @@
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/31400994-a53d-4654-8254-4540fbf07e29" width="100" alt="Logo"/><br/>
   <h4 align="center"><strong><code>Weird</code></strong> - A terminal-based code editor</h4>
 </p>
 
