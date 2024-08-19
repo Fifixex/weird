@@ -8,7 +8,7 @@ use crate::files;
     version,
     about
 )]
-pub struct CliArgs {
+pub struct Args {
     #[command(subcommand)]
     pub command: Command,
 }

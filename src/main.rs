@@ -1,10 +1,13 @@
-use args::{CliArgs, Command};
 use anyhow::Result;
 use clap::Parser;
+use application::Application;
+use args::Args;
 
 mod files;
 
+mod application;
 mod args;
+mod editor;
 mod util;
 
 pub fn main() -> Result<()> {
@@ -14,9 +17,8 @@ pub fn main() -> Result<()> {
         .compact()
         .init();
 
-    let args = CliArgs::parse();
-
-    match args.command {
-        Command::Files(args) => files::run(args)
-    }
+    let args = Args::parse();
+    let mut app = Application::new(args)?;
+    app.run()?;
+    Ok(())
 }
