@@ -4,7 +4,7 @@ pub struct Editor {
     /// Storage of all the documents opened in the editor
     pub documents: Vec<Document>,
     /// Interface for writing to the terminal
-    pub terminal: Terminal;
+    pub terminal: Terminal,
 }
 
 impl Editor {

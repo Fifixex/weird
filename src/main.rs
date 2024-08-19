@@ -1,7 +1,7 @@
 use anyhow::Result;
-use clap::Parser;
 use application::Application;
 use args::Args;
+use clap::Parser;
 
 mod files;
 

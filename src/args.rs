@@ -3,11 +3,7 @@ use clap::{Parser, Subcommand};
 use crate::files;
 
 #[derive(Parser, Debug)]
-#[command(
-    author,
-    version,
-    about
-)]
+#[command(author, version, about)]
 pub struct Args {
     #[command(subcommand)]
     pub command: Command,
