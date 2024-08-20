@@ -1,4 +1,4 @@
-use crate::args::Args;
+use clap::ArgMatches;
 use crate::editor::Editor;
 use anyhow::Result;
 
@@ -7,7 +7,7 @@ pub struct Application {
 }
 
 impl Application {
-    pub fn new(args: Args) -> Result<Self> {
+    pub fn new(args: ArgMatches) -> Result<Self> {
         let mut editor = Editor::new()?;
         let app = Self { editor };
         Ok(app)

@@ -1,12 +1,9 @@
 use anyhow::Result;
 use application::Application;
-use args::Args;
-use clap::Parser;
-
-mod files;
+use cli::build_app;
 
 mod application;
-mod args;
+mod cli;
 mod editor;
 mod util;
 
@@ -17,7 +14,7 @@ pub fn main() -> Result<()> {
         .compact()
         .init();
 
-    let args = Args::parse();
+    let args = build_app().get_matches();
     let mut app = Application::new(args)?;
     app.run()?;
     Ok(())
