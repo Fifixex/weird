@@ -5,7 +5,7 @@
 
 <h6 align="center">
 
-[Installation](/#-introduction) · [Showcase][github-issues-link] · [Contribute][github-issues-link]
+[Introduction](/#-introduction) · [Showcase][github-issues-link] · [Contribute][github-issues-link]
 
 </h6>
 
