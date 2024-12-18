@@ -1,13 +1,10 @@
-use std::path::PathBuf;
-use std::env;
+use clap::{crate_name, crate_version, value_parser, Arg, Command};
 use once_cell::sync::Lazy;
-use clap::{
-    crate_name, crate_version, value_parser, Arg, Command,
-};
+use std::env;
+use std::path::PathBuf;
 
-static VERSION: Lazy<String> = Lazy::new(|| {
-    env::var("CARGO_PKG_VERSION").unwrap_or_else(|_| crate_version!().to_string())
-});
+static VERSION: Lazy<String> =
+    Lazy::new(|| env::var("CARGO_PKG_VERSION").unwrap_or_else(|_| crate_version!().to_string()));
 
 pub fn build_app() -> Command {
     Command::new(crate_name!())
@@ -18,11 +15,13 @@ pub fn build_app() -> Command {
         .disable_help_subcommand(true)
         .max_term_width(100)
         .about("A terminal-based code editor inspired in (Neo)Vim")
-        .long_about("A terminal-based code editor in Rust, inspired by Vim for efficient coding workflows.")
+        .long_about(
+            "A terminal-based code editor in Rust, inspired by Vim for efficient coding workflows.",
+        )
         .arg(
             Arg::new("FILE")
                 .help("File(s) to edit / create. Use '-' for standard input")
                 .num_args(1..)
-                .value_parser(value_parser!(PathBuf))
+                .value_parser(value_parser!(PathBuf)),
         )
 }
