@@ -5,6 +5,7 @@ use cli::build_app;
 mod application;
 mod cli;
 mod editor;
+mod terminal;
 
 pub fn main() -> Result<()> {
     tracing_subscriber::fmt()
