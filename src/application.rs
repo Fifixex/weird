@@ -20,7 +20,12 @@ impl Application {
         Ok(Self { editor })
     }
     pub fn run(&mut self) -> Result<()> {
-        self.editor.render();
+        loop {
+            self.editor.render()?;
+            if !self.editor.handle_input()? {
+                break;
+            }
+        }
         Ok(())
     }
 }
