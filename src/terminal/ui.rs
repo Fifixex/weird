@@ -2,19 +2,22 @@ use crossterm::{
     cursor, execute,
     terminal::{self, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
 };
-use std::io::Result;
-use std::io::{stdout, Write};
+use std::io::{stdout, Result, Write};
 
 pub struct Terminal {
-    pub size: (u16, u16),
+    size: (u16, u16),
 }
 
 impl Terminal {
-    pub fn new() -> Self {
-        let (cols, rows) = terminal::size().unwrap_or((80, 24));
-        terminal::enable_raw_mode().unwrap();
-        execute!(stdout(), EnterAlternateScreen).unwrap();
-        Self { size: (cols, rows) }
+    pub fn new() -> Result<Self> {
+        terminal::enable_raw_mode()?;
+        execute!(stdout(), EnterAlternateScreen)?;
+        let size = terminal::size()?;
+        Ok(Self { size })
+    }
+
+    pub fn size(&self) -> Result<(u16, u16)> {
+        terminal::size()
     }
 
     pub fn clear_screen(&self) -> Result<()> {
@@ -32,7 +35,7 @@ impl Terminal {
 
 impl Drop for Terminal {
     fn drop(&mut self) {
-        terminal::disable_raw_mode().unwrap();
-        execute!(stdout(), LeaveAlternateScreen).unwrap();
+        let _ = terminal::disable_raw_mode();
+        let _ = execute!(stdout(), LeaveAlternateScreen);
     }
 }

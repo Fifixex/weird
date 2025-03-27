@@ -4,7 +4,7 @@ use cli::build_app;
 
 mod application;
 mod cli;
-mod editor;
+mod core;
 mod terminal;
 
 pub fn main() -> Result<()> {
